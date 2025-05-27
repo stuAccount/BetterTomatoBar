@@ -1,5 +1,5 @@
-import SwiftUI
 import LaunchAtLogin
+import SwiftUI
 
 extension NSImage.Name {
     static let idle = Self("BarIconIdle")
@@ -40,7 +40,7 @@ class TBStatusItem: NSObject, NSApplicationDelegate {
         popover.contentViewController?.view = NSHostingView(rootView: view)
         if let contentViewController = popover.contentViewController {
             popover.contentSize.height = contentViewController.view.intrinsicContentSize.height
-            popover.contentSize.width = 240
+            popover.contentSize.width = 300
         }
 
         statusBarItem = NSStatusBar.system.statusItem(
@@ -60,7 +60,7 @@ class TBStatusItem: NSObject, NSApplicationDelegate {
             string: title != nil ? " \(title!)" : "",
             attributes: [
                 NSAttributedString.Key.font: digitFont,
-                NSAttributedString.Key.paragraphStyle: paragraphStyle
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
             ]
         )
         statusBarItem?.button?.attributedTitle = attributedTitle
