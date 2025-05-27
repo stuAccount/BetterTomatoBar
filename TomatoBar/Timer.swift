@@ -1,3 +1,4 @@
+import AppKit
 import KeyboardShortcuts
 import SwiftState
 import SwiftUI
@@ -182,11 +183,28 @@ class TBTimer: ObservableObject {
         startTimer(seconds: workIntervalLength * 60)
     }
 
+    //
+   private func showSessionEndPopup(message: String) {
+       DispatchQueue.main.async {
+           let alert = NSAlert()
+           alert.messageText = "Pomodoro Session complete!"
+           alert.informativeText = message
+           alert.addButton(withTitle: "OK")
+           alert.alertStyle = .informational
+           if let window = NSApplication.shared.mainWindow {
+               alert.beginSheetModal(for: window, completionHandler: nil)
+           } else {
+               alert.runModal()
+           }
+       }
+   }
+   //
     private func onWorkFinish(context _: TBStateMachine.Context) {
         consecutiveWorkIntervals += 1
         player.playDing()
+        showSessionEndPopup(message: "Time for a break!")
     }
-
+    
     private func onWorkEnd(context _: TBStateMachine.Context) {
         player.stopTicking()
     }
@@ -219,6 +237,7 @@ class TBTimer: ObservableObject {
             body: NSLocalizedString("TBTimer.onRestFinish.body", comment: "Break is over body"),
             category: .restFinished
         )
+        showSessionEndPopup(message: "Break is over! Get up boy!")
     }
 
     private func onIdleStart(context _: TBStateMachine.Context) {
