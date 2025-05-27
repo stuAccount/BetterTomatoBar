@@ -1,3 +1,28 @@
+## ⏱️ Hybrid Pomodoro Schedule
+
+This is a hybrid productivity structure combining **custom deep work Pomodoros** and the **textbook Pomodoro Technique** for different energy levels throughout the day.
+
+| Time of Day | Style               | Work Interval | Short Rest | Long Rest | Total Time |
+|-------------|---------------------|---------------|-------------|------------|-------------|
+| ☀️ Morning   | Custom (Deep Focus) | 40 min        | 10 min      | 20 min     | 3h 30m      |
+| 🌤️ Afternoon | Textbook Pomodoro   | 25 min        | 5 min       | 30 min     | 3h 30m      |
+| 🌙 Night     | Light Pomodoro      | 25 min        | 5 min       | 20 min     | 2h 30m      |
+
+---
+
+### 📌 An Ideal Pomodoro for Reference
+
+The **textbook Pomodoro Technique** consists of:
+
+- **25 minutes** of focused work  
+- **5 minutes** short break  
+- After **4 work sessions**, take a **15–30 minute long break**  
+- One full cycle ≈ 2 hours
+
+This structure is great for maintaining stamina, while the custom version above supports longer deep work sessions.
+
+---
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/ivoronin/TomatoBar/main/TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128"/>
 <p>
