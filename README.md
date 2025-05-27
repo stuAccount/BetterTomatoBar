@@ -2,7 +2,7 @@
 
 This is a hybrid productivity structure combining **custom deep work Pomodoros** and the **textbook Pomodoro Technique** for different energy levels throughout the day.
 
-| Time of Day | Style               | Work Interval | Short Rest | Long Rest | Work Intervals in a set  |Total Time |
+| Time of Day | Style               | Work Interval | Short Rest | Long Rest | Work Intervals a set  |Total Time |
 |-------------|---------------------|---------------|-------------|------------|------------------|-------------|
 | ☀️ Morning   | Custom (Deep Focus) | 40 min        | 10 min      | 20 min     | 2        | 3h 20m      |
 | 🌤️ Afternoon | Textbook Pomodoro   | 25 min        | 5 min       | 30 min     | 3       | 3h 20m      |
@@ -26,14 +26,15 @@ This structure is great for maintaining stamina, while the custom version above 
 <p align="center">
 <img src="https://raw.githubusercontent.com/ivoronin/TomatoBar/main/TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128"/>
 <p>
- 
-<h1 align="center">TomatoBar</h1>
-<p align="center">
-<img src="https://img.shields.io/github/actions/workflow/status/ivoronin/TomatoBar/main.yml?branch=main"/> <img src="https://img.shields.io/github/downloads/ivoronin/TomatoBar/total"/> <img src="https://img.shields.io/github/v/release/ivoronin/TomatoBar?display_name=tag"/> <img src="https://img.shields.io/homebrew/cask/v/tomatobar"/>
-</p>
+
 
 <img
-  src="https://github.com/ivoronin/TomatoBar/raw/main/screenshot.png?raw=true"
+  src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot.png?raw=true"
+  alt="Screenshot"
+  width="50%"
+  align="left"
+/><img
+  src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot2.png?raw=true"
   alt="Screenshot"
   width="50%"
   align="right"
