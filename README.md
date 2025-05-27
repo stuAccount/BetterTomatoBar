@@ -27,20 +27,19 @@ This structure is great for maintaining stamina, while the custom version above 
 <img src="https://raw.githubusercontent.com/ivoronin/TomatoBar/main/TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128"/>
 <p>
 
-
-<img
-  src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot.png?raw=true"
-  alt="Screenshot"
-  width="50%"
-  align="left"
-/><img
-  src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot2.png?raw=true"
-  alt="Screenshot"
-  width="50%"
-  align="right"
-/>
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot.png?raw=true" alt="Screenshot 1" width="400"/>
+    </td>
+    <td>
+      <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot2.png?raw=true" alt="Screenshot 2" width="400"/>
+    </td>
+  </tr>
+</table>
 
 ## Overview
+
 Have you ever heard of Pomodoro? It’s a great technique to help you keep track of time and stay on task during your studies or work. Read more about it on <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Wikipedia</a>.
 
 TomatoBar is world's neatest Pomodoro timer for the macOS menu bar. All the essential features are here - configurable
