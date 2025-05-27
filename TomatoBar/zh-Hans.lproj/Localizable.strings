@@ -12,6 +12,8 @@
 "SoundsView.isWindupEnabled.label" = "发条声";
 "SoundsView.isDingEnabled.label" = "叮";
 "SoundsView.isTickingEnabled.label" = "滴答声";
+"SoundsView.isDarkEnabled.label" = "黑暗音";
+"SoundsView.isRainyEnabled.label" = "雨声";
 "TBPopoverView.start.label" = "开始";
 "TBPopoverView.stop.label" = "停止";
 "TBPopoverView.intervals.label" = "时长";

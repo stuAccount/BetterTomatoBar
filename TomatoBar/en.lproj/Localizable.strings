@@ -12,6 +12,8 @@
 "SoundsView.isWindupEnabled.label" = "Windup";
 "SoundsView.isDingEnabled.label" = "Ding";
 "SoundsView.isTickingEnabled.label" = "Ticking";
+"SoundsView.isDarkEnabled.label" = "Dark";
+"SoundsView.isRainyEnabled.label" = "Rainy";
 "TBPopoverView.start.label" = "Start";
 "TBPopoverView.stop.label" = "Stop";
 "TBPopoverView.intervals.label" = "Intervals";

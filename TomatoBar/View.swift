@@ -229,6 +229,16 @@ private struct SoundsView: View {
                     "SoundsView.isTickingEnabled.label",
                     comment: "Ticking label"))
             VolumeSlider(volume: $player.tickingVolume)
+            Text(
+                NSLocalizedString(
+                    "SoundsView.isRainyEnabled.label",
+                    comment: "Rainy label"))
+            VolumeSlider(volume: $player.rainyVolume)
+            Text(
+                NSLocalizedString(
+                    "SoundsView.isDarkEnabled.label",
+                    comment: "Dark label"))
+            VolumeSlider(volume: $player.darkVolume)
         }.padding(4)
         Spacer().frame(minHeight: 0)
     }
