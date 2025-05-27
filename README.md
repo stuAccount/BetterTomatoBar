@@ -2,11 +2,11 @@
 
 This is a hybrid productivity structure combining **custom deep work Pomodoros** and the **textbook Pomodoro Technique** for different energy levels throughout the day.
 
-| Time of Day | Style               | Work Interval | Short Rest | Long Rest | Total Time |
-|-------------|---------------------|---------------|-------------|------------|-------------|
-| ☀️ Morning   | Custom (Deep Focus) | 40 min        | 10 min      | 20 min     | 3h 30m      |
-| 🌤️ Afternoon | Textbook Pomodoro   | 25 min        | 5 min       | 30 min     | 3h 30m      |
-| 🌙 Night     | Light Pomodoro      | 25 min        | 5 min       | 20 min     | 2h 30m      |
+| Time of Day | Style               | Work Interval | Short Rest | Long Rest | Work Intervals in a set  |Total Time |
+|-------------|---------------------|---------------|-------------|------------|------------------|-------------|
+| ☀️ Morning   | Custom (Deep Focus) | 40 min        | 10 min      | 20 min     | 2        | 3h 20m      |
+| 🌤️ Afternoon | Textbook Pomodoro   | 25 min        | 5 min       | 30 min     | 3       | 3h 20m      |
+| 🌙 Night     | Light Pomodoro      | 30 min        | 5 min       | 20 min     | 2       | 2h 30m      |
 
 ---
 
