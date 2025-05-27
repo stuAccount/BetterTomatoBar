@@ -1,70 +1,69 @@
-## ⏱️ Hybrid Pomodoro Schedule
 
-This is a hybrid productivity structure combining **custom deep work Pomodoros** and the **textbook Pomodoro Technique** for different energy levels throughout the day.
-
-| Time of Day | Style               | Work Interval | Short Rest | Long Rest | Work Intervals a set  |Total Time |
-|-------------|---------------------|---------------|-------------|------------|------------------|-------------|
-| ☀️ Morning   | Custom (Deep Focus) | 40 min        | 10 min      | 20 min     | 2        | 3h 20m      |
-| 🌤️ Afternoon | Textbook Pomodoro   | 25 min        | 5 min       | 30 min     | 3       | 3h 20m      |
-| 🌙 Night     | Light Pomodoro      | 30 min        | 5 min       | 20 min     | 2       | 2h 30m      |
-
----
-
-### 📌 An Ideal Pomodoro for Reference
-
-The **textbook Pomodoro Technique** consists of:
-
-- **25 minutes** of focused work  
-- **5 minutes** short break  
-- After **4 work sessions**, take a **15–30 minute long break**  
-- One full cycle ≈ 2 hours
-
-This structure is great for maintaining stamina, while the custom version above supports longer deep work sessions.
-
----
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ivoronin/TomatoBar/main/TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128"/>
-<p>
+    <img src="https://raw.githubusercontent.com/ivoronin/TomatoBar/main/TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128" alt="TomatoBar App Icon"/>
+  </p>
+  <h1 align="center">BetterTomatoBar</h1>
 
-<table>
-  <tr>
-    <td>
-      <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot.png?raw=true" alt="Screenshot 1" width="400"/>
-    </td>
-    <td>
-      <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot2.png?raw=true" alt="Screenshot 2" width="400"/>
-    </td>
-  </tr>
-</table>
+  <p align="center">
+    A neat and configurable Pomodoro timer for the macOS menu bar, building upon the original <a href="https://github.com/ivoronin/TomatoBar">TomatoBar</a>.
+  </p>
 
-## Overview
+  <table>
+    <tr>
+      <td>
+        <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot.png?raw=true" alt="Screenshot 1" width="400"/>
+      </td>
+      <td>
+        <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot2.png?raw=true" alt="Screenshot 2" width="400"/>
+      </td>
+    </tr>
+  </table>
 
-Have you ever heard of Pomodoro? It’s a great technique to help you keep track of time and stay on task during your studies or work. Read more about it on <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Wikipedia</a>.
+  ## 🍅 Overview
 
-TomatoBar is world's neatest Pomodoro timer for the macOS menu bar. All the essential features are here - configurable
-work and rest intervals, optional sounds, discreet actionable notifications, global hotkey.
+  Have you ever heard of the Pomodoro Technique? It’s a great time management method to help you stay focused and on task during your studies or work. Read more about it on <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Wikipedia</a>.
 
-TomatoBar is fully sandboxed with no entitlements.
+  ## 🚀 Getting Started
 
-Download the latest release <a href="https://github.com/ivoronin/TomatoBar/releases/latest/">here</a> or install using Homebrew:
-```
-$ brew install --cask tomatobar
-```
+  1.  **Download:** Get the latest release [here](https://github.com/stuAccount/BetterTomatoBar/releases/).
+  2.  **Run the App:** If you can't launch the app because it's unsigned, open your terminal and run the following command:
+      
+      ```bash
+      xattr -c /Path/To/BetterTomatoBar.app 
+      ```
 
-If the app doesn't start, install using the `--no-quarantine` flag:
-```
-$ brew install --cask --no-quarantine tomatobar
-```
+  ## ⏱️ Using Pomodoro Schedules
 
-## Integration with other tools
-### Event log
-TomatoBar logs state transitions in JSON format to `~/Library/Containers/com.github.ivoronin.TomatoBar/Data/Library/Caches/TomatoBar.log`. Use this data to analyze your productivity and enrich other data sources.
-### Starting and stopping the timer
-TomatoBar can be controlled using `tomatobar://` URLs. To start or stop the timer from the command line, use `open tomatobar://startStop`.
+  BetterTomatoBar supports flexible Pomodoro scheduling. Here are some approaches:
 
-## Older versions
-Touch bar integration and older macOS versions (earlier than Big Sur) are supported by TomatoBar versions prior to 3.0
+  ### Hybrid Pomodoro Schedule
 
-## Licenses
- - Timer sounds are licensed from buddhabeats
+  This is a hybrid productivity structure combining **custom deep work Pomodoros** and the **textbook Pomodoro Technique** for different energy levels throughout the day.
+
+  | Time of Day |        Style        | Work Interval | Short Rest | Long Rest | Work Intervals a set | Total  |
+  | :---------- | :-----------------: | :-----------: | :--------: | :-------: | :------------------: | ------ |
+  | ☀️ Morning   | Custom (Deep Focus) |    40 min     |   10 min   |  20 min   |          2           | 3h 20m |
+  | 🌤️ Afternoon |  Textbook Pomodoro  |    25 min     |   5 min    |  30 min   |          3           | 3h 20m |
+  | 🌙 Night     |   Light Pomodoro    |    30 min     |   5 min    |  20 min   |          2           | 2h 30m |
+
+---
+
+  ### 📌 An Ideal Pomodoro for Reference
+
+  The **textbook Pomodoro Technique** consists of:
+
+  - **25 minutes** of focused work  
+  - **5 minutes** short break  
+  - After **4 work sessions**, take a **15–30 minute long break**  
+  - One full cycle ≈ 2 hours
+
+  This structure is great for maintaining stamina, while custom versions can support longer deep work sessions.
+
+  ## 📄 Licenses
+
+  - Timer sounds are licensed from buddhabeats
+
+  ## 🙏 Acknowledgements
+
+  BetterTomatoBar is a fork and enhancement of the original [TomatoBar by ivoronin](https://github.com/ivoronin/TomatoBar). Many thanks to the original creator for the foundation.
