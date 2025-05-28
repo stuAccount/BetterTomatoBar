@@ -12,7 +12,7 @@
   <table>
     <tr>
       <td>
-        <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot.png?raw=true" alt="Screenshot 1" width="400"/>
+        <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot1.png?raw=true" alt="Screenshot 1" width="400"/>
       </td>
       <td>
         <img src="https://github.com/stuAccount/BetterTomatoBar/raw/main/screenshot2.png?raw=true" alt="Screenshot 2" width="400"/>

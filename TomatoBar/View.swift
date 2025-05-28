@@ -28,6 +28,20 @@ private struct IntervalsView: View {
 
     var body: some View {
         VStack {
+            // Preset Picker
+            HStack {
+                Spacer()
+                Picker("", selection: $timer.currentPreset) {
+                    ForEach(PresetType.allCases) { preset in
+                        Text(preset.label).tag(preset.rawValue)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: timer.currentPreset) { _ in
+                    timer.selectPreset(PresetType(rawValue: timer.currentPreset) ?? .morning)
+                }
+                Spacer()
+            }
             // Work Interval
             HStack {
                 Text(
@@ -46,6 +60,10 @@ private struct IntervalsView: View {
                     .frame(width: 40)
                     .multilineTextAlignment(.trailing)
                     .textFieldStyle(.roundedBorder)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
+                    .onChange(of: timer.workIntervalLength) { _ in
+                        timer.updateCustomPresetFromFields()
+                    }
 
                     Text("min")
                         .foregroundColor(.secondary)
@@ -53,6 +71,7 @@ private struct IntervalsView: View {
                 }
 
                 Stepper("", value: $timer.workIntervalLength, in: 1...90)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
             }
 
             // Short Rest Interval
@@ -73,6 +92,10 @@ private struct IntervalsView: View {
                     .frame(width: 40)
                     .multilineTextAlignment(.trailing)
                     .textFieldStyle(.roundedBorder)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
+                    .onChange(of: timer.shortRestIntervalLength) { _ in
+                        timer.updateCustomPresetFromFields()
+                    }
 
                     Text("min")
                         .foregroundColor(.secondary)
@@ -80,6 +103,7 @@ private struct IntervalsView: View {
                 }
 
                 Stepper("", value: $timer.shortRestIntervalLength, in: 1...90)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
             }
 
             // Long Rest Interval
@@ -100,6 +124,10 @@ private struct IntervalsView: View {
                     .frame(width: 40)
                     .multilineTextAlignment(.trailing)
                     .textFieldStyle(.roundedBorder)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
+                    .onChange(of: timer.longRestIntervalLength) { _ in
+                        timer.updateCustomPresetFromFields()
+                    }
 
                     Text("min")
                         .foregroundColor(.secondary)
@@ -107,6 +135,7 @@ private struct IntervalsView: View {
                 }
 
                 Stepper("", value: $timer.longRestIntervalLength, in: 1...90)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
             }
             .help(
                 NSLocalizedString(
@@ -130,8 +159,13 @@ private struct IntervalsView: View {
                 .frame(width: 40)
                 .multilineTextAlignment(.trailing)
                 .textFieldStyle(.roundedBorder)
+                .disabled(timer.currentPreset != PresetType.custom.rawValue)
+                .onChange(of: timer.workIntervalsInSet) { _ in
+                    timer.updateCustomPresetFromFields()
+                }
 
                 Stepper("", value: $timer.workIntervalsInSet, in: 1...10)
+                    .disabled(timer.currentPreset != PresetType.custom.rawValue)
             }
             .help(
                 NSLocalizedString(
@@ -141,6 +175,10 @@ private struct IntervalsView: View {
             Spacer().frame(minHeight: 0)
         }
         .padding(4)
+        .onAppear {
+            timer.loadPresets()
+            timer.loadPresetToFields()
+        }
     }
 }
 

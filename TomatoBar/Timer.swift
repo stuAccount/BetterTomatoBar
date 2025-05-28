@@ -3,6 +3,27 @@ import KeyboardShortcuts
 import SwiftState
 import SwiftUI
 
+struct TimerPreset: Codable, Equatable {
+    var workIntervalLength: Int
+    var shortRestIntervalLength: Int
+    var longRestIntervalLength: Int
+    var workIntervalsInSet: Int
+}
+
+enum PresetType: Int, CaseIterable, Identifiable {
+    case morning = 0
+    case afternoon, night, custom
+    var id: Int { rawValue }
+    var label: String {
+        switch self {
+        case .morning: return "morning"
+        case .afternoon: return "afternoon"
+        case .night: return "night"
+        case .custom: return "custom"
+        }
+    }
+}
+
 class TBTimer: ObservableObject {
     @AppStorage("stopAfterBreak") var stopAfterBreak = false
     @AppStorage("showTimerInMenuBar") var showTimerInMenuBar = true
@@ -12,6 +33,23 @@ class TBTimer: ObservableObject {
     @AppStorage("workIntervalsInSet") var workIntervalsInSet = 4
     // This preference is "hidden"
     @AppStorage("overrunTimeLimit") var overrunTimeLimit = -60.0
+
+    @AppStorage("currentPreset") var currentPreset: Int = 0
+    @AppStorage("timerPresets") var presetsData: Data = Data()
+    @Published var presets: [TimerPreset] = [
+        TimerPreset(
+            workIntervalLength: 40, shortRestIntervalLength: 10, longRestIntervalLength: 20,
+            workIntervalsInSet: 2),  // morning
+        TimerPreset(
+            workIntervalLength: 25, shortRestIntervalLength: 5, longRestIntervalLength: 30,
+            workIntervalsInSet: 3),  // afternoon
+        TimerPreset(
+            workIntervalLength: 30, shortRestIntervalLength: 5, longRestIntervalLength: 20,
+            workIntervalsInSet: 2),  // night
+        TimerPreset(
+            workIntervalLength: 25, shortRestIntervalLength: 5, longRestIntervalLength: 15,
+            workIntervalsInSet: 4),  // custom
+    ]
 
     private var stateMachine = TBStateMachine(state: .idle)
     public let player = TBPlayer()
@@ -44,9 +82,11 @@ class TBTimer: ObservableObject {
          *      timerFired (stopAfterBreak)
          *
          */
-        stateMachine.addRoutes(event: .startStop, transitions: [
-            .idle => .work, .work => .idle, .rest => .idle,
-        ])
+        stateMachine.addRoutes(
+            event: .startStop,
+            transitions: [
+                .idle => .work, .work => .idle, .rest => .idle,
+            ])
         stateMachine.addRoutes(event: .timerFired, transitions: [.work => .rest])
         stateMachine.addRoutes(event: .timerFired, transitions: [.rest => .idle]) { _ in
             self.stopAfterBreak
@@ -66,9 +106,11 @@ class TBTimer: ObservableObject {
         stateMachine.addAnyHandler(.any => .rest, handler: onRestStart)
         stateMachine.addAnyHandler(.rest => .work, handler: onRestFinish)
         stateMachine.addAnyHandler(.any => .idle, handler: onIdleStart)
-        stateMachine.addAnyHandler(.any => .any, handler: { ctx in
-            logger.append(event: TBLogEventTransition(fromContext: ctx))
-        })
+        stateMachine.addAnyHandler(
+            .any => .any,
+            handler: { ctx in
+                logger.append(event: TBLogEventTransition(fromContext: ctx))
+            })
 
         stateMachine.addErrorHandler { ctx in fatalError("state machine context: <\(ctx)>") }
 
@@ -80,22 +122,26 @@ class TBTimer: ObservableObject {
         notificationCenter.setActionHandler(handler: onNotificationAction)
 
         let aem: NSAppleEventManager = NSAppleEventManager.shared()
-        aem.setEventHandler(self,
-                            andSelector: #selector(handleGetURLEvent(_:withReplyEvent:)),
-                            forEventClass: AEEventClass(kInternetEventClass),
-                            andEventID: AEEventID(kAEGetURL))
+        aem.setEventHandler(
+            self,
+            andSelector: #selector(handleGetURLEvent(_:withReplyEvent:)),
+            forEventClass: AEEventClass(kInternetEventClass),
+            andEventID: AEEventID(kAEGetURL))
     }
 
-    @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor,
-                                 withReplyEvent: NSAppleEventDescriptor) {
+    @objc func handleGetURLEvent(
+        _ event: NSAppleEventDescriptor,
+        withReplyEvent: NSAppleEventDescriptor
+    ) {
         guard let urlString = event.forKeyword(AEKeyword(keyDirectObject))?.stringValue else {
             print("url handling error: cannot get url")
             return
         }
         let url = URL(string: urlString)
         guard url != nil,
-              let scheme = url!.scheme,
-              let host = url!.host else {
+            let scheme = url!.scheme,
+            let host = url!.host
+        else {
             print("url handling error: cannot parse url")
             return
         }
@@ -186,27 +232,27 @@ class TBTimer: ObservableObject {
     }
 
     //
-   private func showSessionEndPopup(message: String) {
-       DispatchQueue.main.async {
-           let alert = NSAlert()
-           alert.messageText = "Pomodoro Session complete!"
-           alert.informativeText = message
-           alert.addButton(withTitle: "OK")
-           alert.alertStyle = .informational
-           if let window = NSApplication.shared.mainWindow {
-               alert.beginSheetModal(for: window, completionHandler: nil)
-           } else {
-               alert.runModal()
-           }
-       }
-   }
-   //
+    private func showSessionEndPopup(message: String) {
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = "Pomodoro Session complete!"
+            alert.informativeText = message
+            alert.addButton(withTitle: "OK")
+            alert.alertStyle = .informational
+            if let window = NSApplication.shared.mainWindow {
+                alert.beginSheetModal(for: window, completionHandler: nil)
+            } else {
+                alert.runModal()
+            }
+        }
+    }
+    //
     private func onWorkFinish(context _: TBStateMachine.Context) {
         consecutiveWorkIntervals += 1
         player.playDing()
         showSessionEndPopup(message: "Time for a break!")
     }
-    
+
     private func onWorkEnd(context _: TBStateMachine.Context) {
         player.stopTicking()
         player.stopDark()
@@ -248,5 +294,65 @@ class TBTimer: ObservableObject {
         stopTimer()
         TBStatusItem.shared.setIcon(name: .idle)
         consecutiveWorkIntervals = 0
+    }
+}
+
+extension TBTimer {
+    var currentPresetType: PresetType {
+        PresetType(rawValue: currentPreset) ?? .morning
+    }
+
+    var currentPresetInstance: TimerPreset {
+        get { presets[currentPreset] }
+        set {
+            if currentPreset == PresetType.custom.rawValue {
+                presets[currentPreset] = newValue
+                savePresets()
+            }
+        }
+    }
+
+    func selectPreset(_ preset: PresetType) {
+        // Stop the timer if running
+        if timer != nil {
+            stopTimer()
+        }
+        consecutiveWorkIntervals = 0
+        currentPreset = preset.rawValue
+        loadPresetToFields()
+    }
+
+    func loadPresetToFields() {
+        let preset = presets[currentPreset]
+        workIntervalLength = preset.workIntervalLength
+        shortRestIntervalLength = preset.shortRestIntervalLength
+        longRestIntervalLength = preset.longRestIntervalLength
+        workIntervalsInSet = preset.workIntervalsInSet
+    }
+
+    func updateCustomPresetFromFields() {
+        if currentPreset == PresetType.custom.rawValue {
+            presets[currentPreset] = TimerPreset(
+                workIntervalLength: workIntervalLength,
+                shortRestIntervalLength: shortRestIntervalLength,
+                longRestIntervalLength: longRestIntervalLength,
+                workIntervalsInSet: workIntervalsInSet
+            )
+            savePresets()
+        }
+    }
+
+    func savePresets() {
+        if let data = try? JSONEncoder().encode(presets) {
+            presetsData = data
+        }
+    }
+
+    func loadPresets() {
+        if let loaded = try? JSONDecoder().decode([TimerPreset].self, from: presetsData),
+            loaded.count == 4
+        {
+            presets = loaded
+        }
     }
 }
